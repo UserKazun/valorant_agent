@@ -34,7 +34,6 @@ func main() {
 	e.Renderer = tr
 
 	e.GET("/", example)
-
 	e.GET("/home", home)
 
 	e.Logger.Fatal(e.Start(":1323"))
