@@ -1,10 +1,11 @@
-package main
+package valorant
 
 import (
 	"html/template"
 	"io"
 	"net/http"
 
+	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
 )
 
@@ -21,14 +22,15 @@ type ServiceInfo struct {
 }
 
 var (
-	tr = &Renderer{templates: template.Must(template.ParseGlob("views/*.html"))}
+	tr = &Renderer{templates: template.Must(template.ParseGlob("../views/*.html"))}
+	db *sqlx.DB
 )
 
 var serviceInfo = ServiceInfo{
 	"Valorant Agent",
 }
 
-func main() {
+func Run() {
 	e := echo.New()
 
 	e.Renderer = tr
@@ -53,5 +55,5 @@ func home(c echo.Context) error {
 		Content:     "Jett",
 	}
 
-	return c.Render(http.StatusOK, "page1", data)
+	return c.Render(http.StatusOK, "home", data)
 }
