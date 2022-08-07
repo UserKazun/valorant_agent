@@ -11,7 +11,6 @@ import (
 	"net/url"
 	"path"
 	"strings"
-	"time"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/labstack/echo/v4"
@@ -19,20 +18,8 @@ import (
 
 // Agent defines model for Agent.
 type Agent struct {
-	// agent background (Ways of life, thoughts, etc.)
-	Background *string `json:"background,omitempty"`
-
-	// data created datetime
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// agent id
-	Id *int `json:"id,omitempty"`
-
-	// agent name
-	Name *string `json:"name,omitempty"`
-
-	// data updated datetime
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	Status bool
+	Data any
 }
 
 // ServerInterface represents all server handlers.
