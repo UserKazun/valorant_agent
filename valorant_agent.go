@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"valorant_agent/gen/openapi"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -67,6 +68,8 @@ func connectDB() (*sqlx.DB, error) {
 	return sqlx.Open("mysql", dsn)
 }
 
+type getAgentImpl struct{}
+
 func Run() {
 	e := echo.New()
 	e.Debug = true
@@ -77,10 +80,13 @@ func Run() {
 
 	e.Renderer = tr
 
+	myApi := getAgentImpl{}
+	openapi.RegisterHandlers(e, myApi)
+
 	e.GET("/", example)
 	e.GET("/home", home)
 
-	e.GET("/api/agents", getAgents)
+	// e.GET("/api/agents", getAgents)
 	e.GET("/api/agent/:agent_id", getAgent)
 
 	db, err = connectDB()
@@ -115,7 +121,7 @@ func home(c echo.Context) error {
 	return c.Render(http.StatusOK, "home", data)
 }
 
-func getAgents(c echo.Context) error {
+func (h getAgentImpl) GetAgents(c echo.Context) error {
 	ctx := context.Background()
 	agentRow := []Agent{}
 	if err := db.SelectContext(
@@ -126,7 +132,7 @@ func getAgents(c echo.Context) error {
 		return fmt.Errorf("error agents: %v", err)
 	}
 
-	return c.JSON(http.StatusOK, SuccessResult{
+	return c.JSON(http.StatusOK, &openapi.Agent{
 		Status: true,
 		Data:   &agentRow,
 	})
