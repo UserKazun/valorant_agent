@@ -29,14 +29,6 @@ type ServiceInfo struct {
 	Title string
 }
 
-type Agent struct {
-	ID         int    `db:"id"`
-	Name       string `db:"name"`
-	Background string `db:"background"`
-	CreatedAt  string `db:"created_at"`
-	UpdatedAt  string `db:"updated_at"`
-}
-
 var (
 	tr  = &Renderer{templates: template.Must(template.ParseGlob("../views/*.html"))}
 	db  *sqlx.DB
@@ -123,7 +115,7 @@ func home(c echo.Context) error {
 
 func (h getAgentImpl) GetAgents(c echo.Context) error {
 	ctx := context.Background()
-	agentRow := []Agent{}
+	agentRow := []openapi.Agent{}
 	if err := db.SelectContext(
 		ctx,
 		&agentRow,
@@ -132,9 +124,9 @@ func (h getAgentImpl) GetAgents(c echo.Context) error {
 		return fmt.Errorf("error agents: %v", err)
 	}
 
-	return c.JSON(http.StatusOK, &openapi.Agent{
+	return c.JSON(http.StatusOK, &openapi.AgentSuccessResult{
 		Status: true,
-		Data:   &agentRow,
+		Data:   agentRow,
 	})
 }
 
@@ -146,7 +138,7 @@ func getAgent(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "agent_id required")
 	}
 
-	agentRow := []Agent{}
+	agentRow := []openapi.Agent{}
 	if err := db.SelectContext(
 		ctx,
 		&agentRow,
