@@ -81,6 +81,7 @@ func Run() {
 	e.GET("/home", home)
 
 	e.GET("/api/agents", getAgents)
+	e.GET("/api/agent/:agent_id", getAgent)
 
 	db, err = connectDB()
 	if err != nil {
@@ -123,6 +124,30 @@ func getAgents(c echo.Context) error {
 		"SELECT * FROM agents",
 	); err != nil && err != sql.ErrNoRows {
 		return fmt.Errorf("error agents: %v", err)
+	}
+
+	return c.JSON(http.StatusOK, SuccessResult{
+		Status: true,
+		Data:   &agentRow,
+	})
+}
+
+func getAgent(c echo.Context) error {
+	ctx := context.Background()
+
+	agentID := c.Param("agent_id")
+	if agentID == "" {
+		return echo.NewHTTPError(http.StatusBadRequest, "agent_id required")
+	}
+
+	agentRow := []Agent{}
+	if err := db.SelectContext(
+		ctx,
+		&agentRow,
+		"SELECT * FROM agents WHERE id = ?",
+		agentID,
+	); err != nil && err != sql.ErrNoRows {
+		return fmt.Errorf("error SELECT agents: %v", err)
 	}
 
 	return c.JSON(http.StatusOK, SuccessResult{
