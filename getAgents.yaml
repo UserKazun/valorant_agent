@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Get all agents API
+  version: '1.0'
+  description: valorant.agents から全てのデータを取得する
+servers:
+  - url: 'http://localhost:1323'
+paths:
+  /api/agents:
+    parameters: []
+    get:
+      summary: Get Agents
+      tags:
+        - agent
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+              examples:
+                Get Agents:
+                  value:
+                    status: true
+                    data:
+                      - ID: 1
+                        Name: jett
+                        Background: ''
+                        CreatedAt: '2022-07-31T00:52:39Z'
+                        UpdatedAt: '2022-07-31T00:52:39Z'
+        '404':
+          description: Not Found
+      operationId: getAgents
+      description: valorant.agents から全てのデータを取得する
+components:
+  schemas:
+    Agent:
+      title: User
+      type: object
+      description: ''
+      x-examples:
+        Alice Smith:
+          id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: agent id
+        name:
+          type: string
+          description: agent name
+        background:
+          type: string
+          description: 'agent background (Ways of life, thoughts, etc.)'
+        created_at:
+          type: string
+          description: data created datetime
+          format: date-time
+        updated_at:
+          type: string
+          description: data updated datetime
+          format: date-time
+  securitySchemes: {}
+  responses:
+    agents:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: boolean
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    background:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    updatede_at:
+                      type: string
+                      format: date-time
+          examples:
+            agents:
+              value:
+                status: true
+                data:
+                  - ID: 1
+                    Name: jett
+                    Background: ''
+                    CreatedAt: '2022-07-31T00:52:39Z'
+                    UpdatedAt: '2022-07-31T00:52:39Z'
