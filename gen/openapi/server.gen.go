@@ -16,10 +16,18 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// Agent defines model for Agent.
 type Agent struct {
-	Status bool
-	Data any
+	ID         int    `db:"id"`
+	Name       string `db:"name"`
+	Background string `db:"background"`
+	CreatedAt  string `db:"created_at"`
+	UpdatedAt  string `db:"updated_at"`
+}
+
+// Agent defines model for Agent.
+type AgentSuccessResult struct {
+	Status bool `json:"status"`
+	Data []Agent `json:"data"`
 }
 
 // ServerInterface represents all server handlers.
