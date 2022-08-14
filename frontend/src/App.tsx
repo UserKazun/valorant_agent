@@ -1,10 +1,11 @@
+import Layout from 'components/layout';
 import './App.css';
-import Header from 'components/Header';
+
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
+      <Layout></Layout>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
