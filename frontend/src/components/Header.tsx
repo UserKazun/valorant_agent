@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 // import styled from "styled-components"
 
-const Header = ({ siteTitle }: { siteTitle: string }) => (
+const Header = (props: { siteTitle: string }) => (
     <header
     style={{
       background: `#BD3944`,
@@ -22,7 +22,7 @@ const Header = ({ siteTitle }: { siteTitle: string }) => (
         margin: 0,
         textAlign: 'left'
         }}>
-        {siteTitle}
+        {props.siteTitle}
         {/* <Link
           to="/"
           style={{

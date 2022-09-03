@@ -3,7 +3,7 @@ import "./layout.css"
 
 const Layout = () => {
     return (
-        <Header siteTitle={`VALORANT AGENT`} />
+        <Header siteTitle='VALORANT AGENT' />
     )
 }
 
