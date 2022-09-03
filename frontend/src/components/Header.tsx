@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-// import styled from "styled-components"
 
 const Header = (props: { siteTitle: string }) => (
     <header
@@ -23,15 +22,6 @@ const Header = (props: { siteTitle: string }) => (
         textAlign: 'left'
         }}>
         {props.siteTitle}
-        {/* <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link> */}
       </h1>
     </div>
   </header>
