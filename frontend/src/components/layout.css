@@ -111,8 +111,3 @@ section {
   font-family: 'valorant';
   src: local('valorant'), url('../../fonts/Valorant.ttf') format('ttf');
 }
-
-header {
-  font-size: 24px;
-  font-family: 'valorant';
-}

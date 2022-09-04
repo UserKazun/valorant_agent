@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import SignUpButton from "./SignUpButton";
 
 //props: { siteTitle: string }
 export default function Header(): JSX.Element {
     return (
       <Wrapper>
-
-        <SignUpButton />
+        <FontWrapper>
+          <Title>VALORANT AGENT</Title>
+        </FontWrapper>
+        {/* <SignUpButton /> */}
       </Wrapper>
     );
   // <header
@@ -36,7 +37,19 @@ export default function Header(): JSX.Element {
   // </header>
 };
 
-const Wrapper = styled.div`
-  width: 1440px;
-  height: 64px;
+const Wrapper = styled.header`
+  background: #BD3944;
+`
+
+const FontWrapper = styled.div`
+  margin: 0 auto;
+  padding: 1.45rem 1.0875rem;
+`
+
+const Title = styled.h1`
+  color: white;
+  font-family: 'valorant';
+  font-size: 24px;
+  margin: 0;
+  text-align: left;
 `
