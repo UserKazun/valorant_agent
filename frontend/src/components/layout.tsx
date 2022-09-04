@@ -1,10 +1,8 @@
 import Header from "./header"
 import "./layout.css"
 
-const Layout = () => {
+export default function Layout(): JSX.Element {
     return (
-        <Header siteTitle='VALORANT AGENT' />
-    )
-}
-
-export default Layout
+        <Header></Header>
+    );
+};
