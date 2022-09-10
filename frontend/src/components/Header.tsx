@@ -43,10 +43,10 @@ export default function Header(): JSX.Element {
 const Wrapper = styled.header`
     background: #BD3944;
     max-height: 64px;
+    display: flex;
 `
 
 const FontWrapper = styled.div`
-    margin: 0 auto;
     padding: 1.45rem 1.0875rem;
 `
 
@@ -60,4 +60,5 @@ const Title = styled.h1`
 
 const ButtonWrapper = styled.div`
     margin: 0 0 0 auto;
+    padding: 0.54rem 1.0875rem;
 `
