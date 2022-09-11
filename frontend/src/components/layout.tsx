@@ -1,8 +1,22 @@
+import PropTypes from "prop-types"
 import Header from "./header"
 import "./layout.css"
 
-export default function Layout(): JSX.Element {
+type Props = {
+    children : React.ReactNode;
+}
+
+const Layout: React.FC<Props> = ({ children }) => {
     return (
-        <Header></Header>
+        <>
+        <Header />
+        <main>{ children }</main>
+        </>
     );
 };
+
+export default Layout
+
+Layout.propTypes = {
+    children: PropTypes.node.isRequired
+}

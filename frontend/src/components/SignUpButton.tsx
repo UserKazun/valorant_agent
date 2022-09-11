@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export default function SignUpButton(): JSX.Element {
+export default function SignUpButton() {
     return (
         <Wrapper>
             <TextWrapper>

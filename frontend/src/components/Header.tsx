@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import SignUpButton from "./SignUpButton";
 
-//props: { siteTitle: string }
-export default function Header(): JSX.Element {
+export default function Header() {
     return (
       <Wrapper>
         <FontWrapper>
