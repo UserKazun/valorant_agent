@@ -1,10 +1,15 @@
+import Layout from 'components/layout';
 import Hero from 'pages/Hero';
 import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 
 const App = () => {
   return (
-    <Hero></Hero>
+    <>
+    <Layout>
+      <Hero />
+    </Layout>
+    </>
   );
 };
 

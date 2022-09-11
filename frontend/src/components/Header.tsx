@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import SignUpButton from "./SignUpButton";
 
-//props: { siteTitle: string }
-export default function Header(): JSX.Element {
+export default function Header() {
     return (
       <Wrapper>
-        <FontWrapper>
+        <TextWrapper>
           <Title>VALORANT AGENT</Title>
-        </FontWrapper>
+        </TextWrapper>
         <ButtonWrapper>
           <SignUpButton />
         </ButtonWrapper>
@@ -21,7 +20,7 @@ const Wrapper = styled.header`
     display: flex;
 `
 
-const FontWrapper = styled.div`
+const TextWrapper = styled.div`
     padding: 1.45rem 1.0875rem;
 `
 
