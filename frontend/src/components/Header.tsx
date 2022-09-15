@@ -7,6 +7,7 @@ export default function Header() {
         <TextWrapper>
           <Title>VALORANT AGENT</Title>
         </TextWrapper>
+        <LinkText>AGENTS</LinkText>
         <ButtonWrapper>
           <SignUpButton />
         </ButtonWrapper>
@@ -35,4 +36,23 @@ const Title = styled.h1`
 const ButtonWrapper = styled.div`
     margin: 0 0 0 auto;
     padding: 0.54rem 1.0875rem;
+`
+
+const LinkText = styled.p`
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    left: 1143px;
+    top: 25px;
+
+    font-family: 'VALORANT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
 `
