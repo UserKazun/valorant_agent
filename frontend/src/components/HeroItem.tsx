@@ -1,13 +1,17 @@
 import styled from "styled-components";
-import Logo from "images/V_Logomark_Red.png";
+import ToOfficialPageButton from "./ToOfficialPageButton";
 
 export default function HeroItem() {
     return (
         <Wrapper>
             <Title>VALORANT AGENT</Title>
-            <LogoWrapper>
-                <LogoImage src={Logo} alt="logo" />
-            </LogoWrapper>
+            <ItemWrapper>
+                <Description>
+                    This site is fan-made.
+                    Click the button below for the official page
+                </Description>
+                <ToOfficialPageButton />
+            </ItemWrapper>
         </Wrapper>
     );
 };
@@ -35,15 +39,25 @@ const Title = styled.div`
     color: #FD4556;
 `
 
-const LogoWrapper = styled.div`
+const ItemWrapper = styled.div`
     display: flex;
     align-items: center;
 `
 
-const LogoImage = styled.img`
+const Description = styled.p`
     position: absolute;
-    width: 1042px;
-    height: 744px;
-    left: 197px;
-    top: 116px;
+    width: 786px;
+    height: 280px;
+    left: 327px;
+    top: 301px;
+
+    font-family: 'VALORANT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 70px;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: white;
 `
