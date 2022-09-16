@@ -5,29 +5,24 @@ export default function HeroItem() {
     return (
         <Wrapper>
             <Title>VALORANT AGENT</Title>
-            <ItemWrapper>
-                <Description>
-                    This site is fan-made.
-                    Click the button below for the official page
-                </Description>
-                <ToOfficialPageButton />
-            </ItemWrapper>
+            <Description>
+                This site is fan-made.
+                Click the button below for the official page
+            </Description>
+            <ToOfficialPageButton />
         </Wrapper>
     );
 };
 
 const Wrapper = styled.div`
-    width: 1440px;
-    height: 797px;
-    background-color: black;
+    width: 100%;
+    height: 100vh;
+    background: black;
 `
 
 const Title = styled.div`
-    position: absolute;
     width: 1202px;
     height: 141px;
-    left: 117px;
-    top: 116px;
 
     font-family: 'VALORANT';
     font-style: normal;
@@ -35,21 +30,17 @@ const Title = styled.div`
     font-size: 128px;
     line-height: 141px;
     text-transform: uppercase;
-
     color: #FD4556;
-`
 
-const ItemWrapper = styled.div`
-    display: flex;
-    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-top: 100px;
 `
 
 const Description = styled.p`
-    position: absolute;
     width: 786px;
     height: 280px;
-    left: 327px;
-    top: 301px;
 
     font-family: 'VALORANT';
     font-style: normal;
@@ -58,6 +49,10 @@ const Description = styled.p`
     line-height: 70px;
     text-align: center;
     text-transform: uppercase;
-
     color: white;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 130px;
+    padding-bottom: 160px;
 `

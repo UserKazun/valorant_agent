@@ -20,11 +20,11 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 0 50px;
 
-    position: absolute;
     width: 200px;
     height: 60px;
-    left: 620px;
-    top: 654px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
 `
 
 const TextWrapper = styled.div`
