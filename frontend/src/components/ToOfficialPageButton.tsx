@@ -1,14 +1,14 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-export default function SignUpButton() {
+export default function ToOfficialPageButton() {
     return (
         <Wrapper>
             <TextWrapper>
-                <Title>Sign Up</Title>
+                <Title>Official</Title>
             </TextWrapper>
         </Wrapper>
     );
-};
+}
 
 const Wrapper = styled.div`
     width: 180px;
@@ -18,7 +18,12 @@ const Wrapper = styled.div`
     border: solid;
     border-color: white;
     align-items: center;
-    padding: 0 50px;
+
+    width: 200px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
 `
 
 const TextWrapper = styled.div`
@@ -29,5 +34,5 @@ const Title = styled.div`
     font-size: 18px;
     font-family: 'valorant';
     color: white;
-    margin: auto;
+    margin: 0 auto;
 `
