@@ -29,4 +29,5 @@ const Title = styled.div`
     font-size: 18px;
     font-family: 'valorant';
     color: white;
+    margin: auto;
 `

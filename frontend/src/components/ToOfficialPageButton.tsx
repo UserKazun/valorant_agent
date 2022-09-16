@@ -18,7 +18,6 @@ const Wrapper = styled.div`
     border: solid;
     border-color: white;
     align-items: center;
-    padding: 0 50px;
 
     width: 200px;
     height: 60px;
@@ -35,5 +34,5 @@ const Title = styled.div`
     font-size: 18px;
     font-family: 'valorant';
     color: white;
+    margin: 0 auto;
 `
-
