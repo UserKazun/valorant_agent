@@ -4,8 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"html/template"
-	"io"
 	"net/http"
 	"os"
 	"valorant_agent/gen/openapi"
@@ -17,20 +15,11 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
-type Renderer struct {
-	templates *template.Template
-}
-
-func (r *Renderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return r.templates.ExecuteTemplate(w, name, data)
-}
-
 type ServiceInfo struct {
 	Title string
 }
 
 var (
-	tr  = &Renderer{templates: template.Must(template.ParseGlob("../views/*.html"))}
 	db  *sqlx.DB
 	err error
 )
@@ -70,15 +59,9 @@ func Run() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Renderer = tr
-
 	myApi := getAgentImpl{}
 	openapi.RegisterHandlers(e, myApi)
 
-	e.GET("/", example)
-	e.GET("/home", home)
-
-	// e.GET("/api/agents", getAgents)
 	e.GET("/api/agent/:agent_id", getAgent)
 
 	db, err = connectDB()
@@ -94,23 +77,6 @@ func Run() {
 type SuccessResult struct {
 	Status bool `json:"status"`
 	Data   any  `json:"data"`
-}
-
-// TODO: 後で消す
-func example(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello")
-}
-
-func home(c echo.Context) error {
-	data := struct {
-		ServiceInfo
-		Content string
-	}{
-		ServiceInfo: serviceInfo,
-		Content:     "Jett",
-	}
-
-	return c.Render(http.StatusOK, "home", data)
 }
 
 func (h getAgentImpl) GetAgents(c echo.Context) error {
