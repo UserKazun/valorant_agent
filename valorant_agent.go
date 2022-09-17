@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"valorant_agent/gen/openapi"
+	"valorant_agent/cmd/model"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -15,18 +15,10 @@ import (
 	"github.com/labstack/gommon/log"
 )
 
-type ServiceInfo struct {
-	Title string
-}
-
 var (
 	db  *sqlx.DB
 	err error
 )
-
-var serviceInfo = ServiceInfo{
-	"Valorant Agent",
-}
 
 func getEnv(key string, defaultValue string) string {
 	if val, ok := os.LookupEnv(key); ok {
@@ -35,7 +27,6 @@ func getEnv(key string, defaultValue string) string {
 	return defaultValue
 }
 
-// 管理用DBに接続する
 func connectDB() (*sqlx.DB, error) {
 	config := mysql.NewConfig()
 	config.Net = "tcp"
@@ -49,8 +40,6 @@ func connectDB() (*sqlx.DB, error) {
 	return sqlx.Open("mysql", dsn)
 }
 
-type getAgentImpl struct{}
-
 func Run() {
 	e := echo.New()
 	e.Debug = true
@@ -59,10 +48,9 @@ func Run() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	myApi := getAgentImpl{}
-	openapi.RegisterHandlers(e, myApi)
-
+	e.GET("/api/agents", getAgents)
 	e.GET("/api/agent/:agent_id", getAgent)
+	e.GET("/login", login)
 
 	db, err = connectDB()
 	if err != nil {
@@ -74,14 +62,9 @@ func Run() {
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
-type SuccessResult struct {
-	Status bool `json:"status"`
-	Data   any  `json:"data"`
-}
-
-func (h getAgentImpl) GetAgents(c echo.Context) error {
+func getAgents(c echo.Context) error {
 	ctx := context.Background()
-	agentRow := []openapi.Agent{}
+	agentRow := []model.Agent{}
 	if err := db.SelectContext(
 		ctx,
 		&agentRow,
@@ -90,7 +73,7 @@ func (h getAgentImpl) GetAgents(c echo.Context) error {
 		return fmt.Errorf("error agents: %v", err)
 	}
 
-	return c.JSON(http.StatusOK, &openapi.AgentSuccessResult{
+	return c.JSON(http.StatusOK, &model.SuccessResult{
 		Status: true,
 		Data:   agentRow,
 	})
@@ -104,7 +87,7 @@ func getAgent(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "agent_id required")
 	}
 
-	agentRow := []openapi.Agent{}
+	agentRow := []model.Agent{}
 	if err := db.SelectContext(
 		ctx,
 		&agentRow,
@@ -114,8 +97,12 @@ func getAgent(c echo.Context) error {
 		return fmt.Errorf("error SELECT agents: %v", err)
 	}
 
-	return c.JSON(http.StatusOK, SuccessResult{
+	return c.JSON(http.StatusOK, model.SuccessResult{
 		Status: true,
 		Data:   &agentRow,
 	})
+}
+
+func login(c echo.Context) error {
+	return nil
 }
