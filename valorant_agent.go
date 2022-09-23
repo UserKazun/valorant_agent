@@ -50,7 +50,7 @@ func Run() {
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
+	e.Use(session.Middleware(sessions.NewFilesystemStore("", []byte("secret"))))
 
 	e.GET("/", sessionHandler)
 	e.POST("/api/register", register)
@@ -68,15 +68,14 @@ func Run() {
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
+// 中で cookie がない場合は生成したり、session を確認したりする。
 func sessionHandler(c echo.Context) error {
 	session, _ := session.Get("session-valorant_agent", c)
-	fmt.Println(*session)
 	session.Options = &sessions.Options{
 		Path:     "/",
 		MaxAge:   86400 * 7,
 		HttpOnly: true,
 	}
-	session.ID = "1"
 	session.Values["foo"] = "bar"
 	session.Save(c.Request(), c.Response())
 
