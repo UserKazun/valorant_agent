@@ -8,7 +8,7 @@ export default function ToOfficialPageButton() {
             </TextWrapper>
         </Wrapper>
     );
-}
+};
 
 const Wrapper = styled.div`
     width: 180px;

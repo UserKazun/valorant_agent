@@ -5,11 +5,9 @@ import reportWebVitals from './reportWebVitals';
 
 const App = () => {
   return (
-    <>
     <Layout>
       <Hero />
     </Layout>
-    </>
   );
 };
 
