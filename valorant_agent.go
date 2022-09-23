@@ -71,6 +71,7 @@ func Run() {
 // 中で cookie がない場合は生成したり、session を確認したりする。
 func sessionHandler(c echo.Context) error {
 	session, _ := session.Get("session-valorant_agent", c)
+
 	session.Options = &sessions.Options{
 		Path:     "/",
 		MaxAge:   86400 * 7,
